@@ -8,6 +8,7 @@ export async function up(knex) {
     return knex.schema.createTable("box_records", (table) => {
         table.increments("id").primary();
         table.date("created_at").notNullable();
+        table.string("boxDeliveryBase").notNullable();
         table.string("boxDeliveryCoefExpr").notNullable();
         table.string("boxDeliveryLiter").notNullable();
         table.string("boxDeliveryMarketplaceBase").notNullable();

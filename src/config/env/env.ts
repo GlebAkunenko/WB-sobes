@@ -21,6 +21,8 @@ const envSchema = z.object({
     ]),
     WB_TOKEN: z.string(),
     WB_API_BASE_URL: z.string(),
+    SHEET_ID: z.string(),
+    SHEET_PAGE_NAME: z.string(),
 });
 
 const env = envSchema.parse({
@@ -33,6 +35,8 @@ const env = envSchema.parse({
     APP_PORT: process.env.APP_PORT,
     WB_TOKEN: process.env.WB_TOKEN,
     WB_API_BASE_URL: process.env.WB_API_BASE_URL,
+    SHEET_ID: process.env.SHEET_ID,
+    SHEET_PAGE_NAME: process.env.SHEET_PAGE_NAME,
 });
 
 export default env;
