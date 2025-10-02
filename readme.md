@@ -1,54 +1,35 @@
-# Шаблон для выполнения тестового задания
+# Тестовое задание
 
 ## Описание
-Шаблон подготовлен для того, чтобы попробовать сократить трудоемкость выполнения тестового задания.
+Данный проект представляет собой node.js сервер выполняющий запросы к API WB для получения тарифов коробов с последующим сохранением данных в google таблицу и базу данных.
 
-В шаблоне настоены контейнеры для `postgres` и приложения на `nodejs`.  
-Для взаимодействия с БД используется `knex.js`.  
-В контейнере `app` используется `build` для приложения на `ts`, но можно использовать и `js`.
+## Подготовка
 
-Шаблон не является обязательным!\
-Можно использовать как есть или изменять на свой вкус.
+### Создание таблицы
+Перейдите по [ссылке](https://docs.google.com/spreadsheets/d/13ND5uQtRtWORIF-o7BMCwWXR4Yv82ug9zhcl5y0wYEo/edit?usp=sharing) на таблицу-шаблон, и скопируйте её себе на диск. 
 
-Все настройки можно найти в файлах:
-- compose.yaml
-- dockerfile
-- package.json
-- tsconfig.json
-- src/config/env/env.ts
-- src/config/knex/knexfile.ts
+URL табилцы построен по следующему принципу: `https://docs.google.com/spreadsheets/d/<ID таблицы>/edit?gid=0#gid=`. `<ID таблицы>` необходимо запомнить.
 
-## Команды:
+Далее необходимо создать проект в [Google Cloud Console](https://console.cloud.google.com/). В этом проекте в поиске вбивает `Sheets Api`. Нажимаем `Manage`. Слева в меню переходим в `Credentials`. Ниже таблица `Service Account`. Создаём новый аккаунт, Permissions: Basic -> Editor.
+Создаём ключ доступа. 3 точки справа от аккаунта в таблице -> `Manage keys` -> `Add key` -> `JSON`. В результате получаем JSON файл.
 
-Запуск базы данных:
-```bash
-docker compose up -d --build postgres
+### Настройка проекта
+Используя Windows PowerShell
 ```
-
-Для выполнения миграций и сидов не из контейнера:
-```bash
-npm run knex:dev migrate latest
+git clone https://github.com/GlebAkunenko/WB-sobes.git
+cd .\WB-sobes\
+cp .\example.env .env 
 ```
+На других ОС, необходимо проделать аналогичные инструкции.
 
-```bash
-npm run knex:dev seed run
+В файле `.env` заполнить необходимые переменные, в частности:
+- `WB_TOKEN` токен для работы с WB API; 
+- `SHEET_ID` то самое `<ID таблицы>` из URL;
+- `GOOGLE_SHEETS_API_KEY_PATH` путь к JSON файлу с ключом доступа к сервисному аккаунту гугла. Лучше всего скопировать в директорию и просто указать имя файла.
+- используя `POSTGRES_EXTERNAL_PORT` есть возможность подключиться к БД извне.
+
+### Запуск
+
 ```
-Также можно использовать и остальные команды (`migrate make <name>`,`migrate up`, `migrate down` и т.д.)
-
-Для запуска приложения в режиме разработки:
-```bash
-npm run dev
+docker compose up
 ```
-
-Запуск проверки самого приложения:
-```bash
-docker compose up -d --build app
-```
-
-Для финальной проверки рекомендую:
-```bash
-docker compose down --rmi local --volumes
-docker compose up --build
-```
-
-PS: С наилучшими пожеланиями!
