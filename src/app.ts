@@ -20,6 +20,6 @@ async function update() {
     }
 }
 
-cron.schedule("*/1 * * * *", () => {
+cron.schedule("0 * * * *", () => {
     update();
 });
