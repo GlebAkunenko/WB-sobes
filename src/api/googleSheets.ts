@@ -50,7 +50,7 @@ export async function writeSheet(data: Array<Array<any>>) {
     });
 }
 
-export async function whiteBoxData(data: Array<BoxDto>) {
+export async function writeBoxData(data: Array<BoxDto>) {
     const records = data.map((d) => {
         return [
             d.warehouseName,
