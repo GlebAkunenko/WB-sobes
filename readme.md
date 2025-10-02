@@ -6,12 +6,14 @@
 ## Подготовка
 
 ### Создание таблицы
-Перейдите по [ссылке](https://docs.google.com/spreadsheets/d/13ND5uQtRtWORIF-o7BMCwWXR4Yv82ug9zhcl5y0wYEo/edit?usp=sharing) на таблицу-шаблон, и скопируйте её себе на диск. 
+Перейдите по [ссылке](https://docs.google.com/spreadsheets/d/13ND5uQtRtWORIF-o7BMCwWXR4Yv82ug9zhcl5y0wYEo/edit?usp=sharing) на таблицу-шаблон, нажмите `Файл` -> `Создать копию`. 
 
 URL табилцы построен по следующему принципу: `https://docs.google.com/spreadsheets/d/<ID таблицы>/edit?gid=0#gid=`. `<ID таблицы>` необходимо запомнить.
 
-Далее необходимо создать проект в [Google Cloud Console](https://console.cloud.google.com/). В этом проекте в поиске вбивает `Sheets Api`. Нажимаем `Manage`. Слева в меню переходим в `Credentials`. Ниже таблица `Service Account`. Создаём новый аккаунт, Permissions: Basic -> Editor.
-Создаём ключ доступа. 3 точки справа от аккаунта в таблице -> `Manage keys` -> `Add key` -> `JSON`. В результате получаем JSON файл.
+Далее необходимо создать проект в [Google Cloud Console](https://console.cloud.google.com/). В этом проекте в поиске вбивает `Sheets Api`. Нажимаем `Enable`/`Manage`, перейдите на страницу сервиса. Слева в меню переходим в `Credentials`. Ниже таблица `Service Account`. Создаём новый аккаунт, Permissions: Basic -> Editor.
+Создаём ключ доступа. 3 точки справа от аккаунта в таблице -> `Manage keys` -> `Add key` -> `Create new key` -> `JSON`. В результате получаем JSON файл, копируем почку сервисного аккаунта.
+
+Переходим в скопированную Google таблицу. В настройках доступа добавляем email созданного сервисного аккаунта, как редактора.
 
 ### Настройка проекта
 Используя Windows PowerShell
